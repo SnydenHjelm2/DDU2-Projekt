@@ -1,0 +1,9 @@
+:root {
+    box-sizing: border-box;
+    --bg: #21b1e0;
+    --hover-color: #3b3bec;
+}
+
+body {
+    background-color: var(--bg);
+}

@@ -1,0 +1,9 @@
+@font-face {
+    font-family: main;
+    src: url(../fonts/Cabin-VariableFont_wdth\,wght.ttf);
+}
+
+@font-face {
+    font-family: mainBold;
+    src: url(../fonts/Lexend-VariableFont_wght.ttf);
+}
