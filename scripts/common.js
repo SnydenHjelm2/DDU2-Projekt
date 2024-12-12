@@ -13,7 +13,7 @@ function createControls() {
     message.textContent = "How many numbers in the grid?";
     message.id = "message";
     input.type = "number";
-    input.placeholder = "A number please..."
+    input.placeholder = "..."
     input.id = "generate-numbers-input";
     button.textContent = "Create";
     button.id = "generate-numbers-button";
@@ -42,6 +42,7 @@ function generateNumbers(amount) {
         let newNum = document.createElement("div");
         newNum.classList.add("cell");
         newNum.textContent = randomNum;
+        newNum.id = i + 1;
         tableDiv.appendChild(newNum);
     }
 }
@@ -52,9 +53,9 @@ const tableDiv = document.querySelector("#table");
 
 createHomeLink();
 let controls = createControls();
-generateNumbers(95);
+generateNumbers(90);
 
-controls.buttonSelector.addEventListener("click", function() {
+controls.buttonSelector.addEventListener("click", () => {
     clearTable();
     generateNumbers(controls.inputSelector.value);
 });
@@ -64,4 +65,4 @@ controls.inputSelector.addEventListener("keypress", (e) => {
         clearTable();
         generateNumbers(controls.inputSelector.value);
     }
-})
+});

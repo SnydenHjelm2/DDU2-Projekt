@@ -17,7 +17,7 @@ body {
     padding: 5px;
 }
 
-#grid-controls {
+.controls {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,6 +42,15 @@ body {
 #home:hover {
     background-color: var(--hover-color);
     border-radius: 5px;
+}
+
+input {
+    text-align: center;
+    width: 50px;
+}
+
+.marked {
+    background-color: aqua;
 }
 
 #message {
