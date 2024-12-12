@@ -6,4 +6,36 @@
 
 body {
     background-color: var(--bg);
+    margin: 0;
+}
+
+#grid-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    max-width: 1200px;
+    margin: 10px auto;
+}
+
+#homeDiv {
+    text-align: center;
+    margin-top: 5px;
+}
+
+#home {
+    font: 18px main;
+    text-decoration: none;
+    padding: 10px;
+    color: black;
+    border-bottom: 2px solid var(--hover-color);
+}
+
+#home:hover {
+    background-color: var(--hover-color);
+    border-radius: 5px;
+}
+
+#message {
+    font: 16px main;
 }
