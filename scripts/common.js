@@ -42,7 +42,7 @@ function generateNumbers(amount) {
         let newNum = document.createElement("div");
         newNum.classList.add("cell");
         newNum.textContent = randomNum;
-        newNum.id = i + 1;
+        newNum.cellID = i + 1;
         tableDiv.appendChild(newNum);
     }
 }

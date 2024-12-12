@@ -8,7 +8,7 @@ function findAddUpToCells(sum) {
     let foundCells = false;
     for (let cell of allCells) {
         for (let cell2 of allCells) {
-            if (cell.id === cell2.id) {
+            if (cell.cellID === cell2.cellID) {
                 continue;
             } else {
                 if (parseInt(cell.textContent) + parseInt(cell2.textContent) === parseInt(sum)) {
