@@ -7,6 +7,14 @@
 body {
     background-color: var(--bg);
     margin: 0;
+    font-family: main;
+}
+
+.cell {
+    background-color: var(--hover-color);
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 #grid-controls {
@@ -24,7 +32,7 @@ body {
 }
 
 #home {
-    font: 18px main;
+    font-size: 18px;
     text-decoration: none;
     padding: 10px;
     color: black;
@@ -37,5 +45,13 @@ body {
 }
 
 #message {
-    font: 16px main;
+    font-size: 16px;
+}
+
+#table {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 10px;
+    max-width: 600px;
+    margin: auto;
 }

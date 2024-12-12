@@ -1,3 +1,10 @@
+function clearTable() {
+    let allCells = document.querySelectorAll(".cell");
+    for (let cell of allCells) {
+        cell.remove();
+    }
+}
+
 function createControls() {
     let message = document.createElement("p");
     let input = document.createElement("input");
@@ -28,7 +35,16 @@ function createHomeLink() {
     homeDiv.appendChild(home);
 }
 
+function generateNumbers(amount) {
+    for (i=0; i<amount; i++) {
+        let randomNum = Math.floor(Math.random() * 100);
 
+        let newNum = document.createElement("div");
+        newNum.classList.add("cell");
+        newNum.textContent = randomNum;
+        tableDiv.appendChild(newNum);
+    }
+}
 
 const homeDiv = document.querySelector("#homeDiv");
 const controlsDiv = document.querySelector("#grid-controls");
@@ -36,3 +52,16 @@ const tableDiv = document.querySelector("#table");
 
 createHomeLink();
 let controls = createControls();
+generateNumbers(95);
+
+controls.buttonSelector.addEventListener("click", function() {
+    clearTable();
+    generateNumbers(controls.inputSelector.value);
+});
+
+controls.inputSelector.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        clearTable();
+        generateNumbers(controls.inputSelector.value);
+    }
+})
