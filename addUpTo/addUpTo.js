@@ -1,9 +1,5 @@
 function findAddUpToCells(sum) {
-    console.log(sum);
-    let allCells = document.querySelectorAll(".cell");
-    for (let cell of allCells) {
-        cell.classList.remove("marked");
-    }
+    let allCells = removeMarked();
 
     let foundCells = false;
     for (let cell of allCells) {

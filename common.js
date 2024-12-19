@@ -47,6 +47,15 @@ function generateNumbers(amount) {
     }
 }
 
+function removeMarked() {
+    let allCells = document.querySelectorAll(".cell");
+    for (let cell of allCells) {
+        cell.classList.remove("marked");
+    }
+
+    return allCells;
+}
+
 const homeDiv = document.querySelector("#homeDiv");
 const controlsDiv = document.querySelector("#grid-controls");
 const tableDiv = document.querySelector("#table");
