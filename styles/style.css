@@ -3,7 +3,7 @@ h1 {
     text-align: center;
 }
 
-nav {
+nav, div {
     max-width: 800px;
     margin: auto;
     border-bottom: solid 2px black;
@@ -11,7 +11,7 @@ nav {
     justify-content: center;
 }
 
-nav a {
+nav a, div a {
     flex-grow: 1;
     flex-basis: 0;
     display: flex;
@@ -22,7 +22,7 @@ nav a {
     color: black;
 }
 
-nav a:hover {
+nav a:hover, div a:hover {
     background-color: var(--hover-color);
 }
 
