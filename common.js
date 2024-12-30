@@ -1,3 +1,20 @@
+function addEventListenersToCells(a) {
+    let allCells = getAllCells();
+
+    for (let cell of allCells) {
+        if (a === "findSame") {
+            cell.addEventListener("click", () => {findSame(cell, allCells)});
+        }
+    }
+}
+
+function addHoverToCells() {
+    let allCells = getAllCells();
+    for (let cell of allCells) {
+        cell.classList.add("hover-cells");
+    }
+}
+
 function clearTable() {
     let allCells = document.querySelectorAll(".cell");
     for (let cell of allCells) {
@@ -47,13 +64,15 @@ function generateNumbers(amount) {
     }
 }
 
+function getAllCells() {;
+    return document.querySelectorAll(".cell");
+}
+
 function removeMarked() {
-    let allCells = document.querySelectorAll(".cell");
+    let allCells = getAllCells();
     for (let cell of allCells) {
         cell.classList.remove("marked");
     }
-
-    return allCells;
 }
 
 const homeDiv = document.querySelector("#homeDiv");

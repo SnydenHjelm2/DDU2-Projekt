@@ -1,5 +1,6 @@
 function findAddUpToCells(sum) {
-    let allCells = removeMarked();
+    let allCells = getAllCells();
+    removeMarked();
 
     let foundCells = false;
     for (let cell of allCells) {

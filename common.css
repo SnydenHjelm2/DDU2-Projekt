@@ -44,9 +44,17 @@ body {
     border-radius: 5px;
 }
 
+.hover-cells:hover {
+    background-color: aquamarine;
+}
+
 input {
     text-align: center;
     width: 50px;
+}
+
+.long-input {
+    width: 150px;
 }
 
 .marked {
@@ -55,6 +63,10 @@ input {
 
 #message {
     font-size: 16px;
+}
+
+.removed {
+    background-color: indianred;
 }
 
 #table {

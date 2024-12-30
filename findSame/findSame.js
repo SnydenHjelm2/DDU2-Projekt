@@ -1,11 +1,3 @@
-function divEventListeners() {
-    let allCells = document.querySelectorAll(".cell");
-
-    for (let div of allCells) {
-        div.addEventListener("click", () => {findSame(div, allCells)});
-    }
-}
-
 function findSame(targetCell, cells) {
     removeMarked();
     targetCell.classList.add("marked");
@@ -25,18 +17,17 @@ function findSame(targetCell, cells) {
 
 const findSameMessage = document.querySelector("#find-same-message");
 const reset = document.querySelector("#find-same-reset");
+addEventListenersToCells("findSame");
 
 controls.buttonSelector.addEventListener("click", () => {
-    divEventListeners();
+    addEventListenersToCells("findSame");
 });
 controls.inputSelector.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
-        divEventListeners();
+        addEventListenersToCells("findSame");
     }
 });
 reset.addEventListener("click", () => {
     removeMarked();
     findSameMessage.textContent = "Click on a number to find copies";
-})
-
-divEventListeners();
+});
