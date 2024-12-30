@@ -1,17 +1,17 @@
 function getRandomNumber() {
     let allCells = getAllCells();
     removeMarked();
-    let randomNumber = randomNumber().toString();
+    let randomNum = randomNumber().toString();
 
     let cellsWithNumber = [];
     for (let cell of allCells) {
-        if (cell.textContent === randomNumber) {
+        if (cell.textContent === randomNum) {
             cell.classList.add("marked");
             cellsWithNumber.push(cell);
         }
     }
 
-    randomNumInput.value = randomNumber;
+    randomNumInput.value = randomNum;
 
     return cellsWithNumber;
 }
