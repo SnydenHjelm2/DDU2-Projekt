@@ -1,7 +1,7 @@
 function getRandomNumber() {
     let allCells = getAllCells();
     removeMarked();
-    let randomNumber = Math.floor(Math.random() * 100).toString();
+    let randomNumber = randomNumber().toString();
 
     let cellsWithNumber = [];
     for (let cell of allCells) {
@@ -40,7 +40,7 @@ const removedNumberInput = document.querySelector("#removed-number");
 let currentRandomCells = null;
 randomNumInput.value = "";
 removedNumberInput.value = "";
-addHoverToCells();
+addHoverToCells("add");
 
 findRandomNumButton.addEventListener("click", () => {
     currentRandomCells = getRandomNumber();
@@ -48,14 +48,15 @@ findRandomNumButton.addEventListener("click", () => {
 
 removeButton.addEventListener("click", () => {
     removeCellsWithNumber(currentRandomCells);
+    addHoverToCells("cleared", currentRandomCells);
 });
 
 controls.buttonSelector.addEventListener("click", () => {
-    addHoverToCells();
+    addHoverToCells("add");
 });
 
 controls.inputSelector.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
-        addHoverToCells();
+        addHoverToCells("add");
     }
 });

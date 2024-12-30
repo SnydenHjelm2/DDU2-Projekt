@@ -48,6 +48,10 @@ body {
     background-color: aquamarine;
 }
 
+.hover-cells-cleared:hover {
+    background-color: orange;
+}
+
 input {
     text-align: center;
     width: 50px;

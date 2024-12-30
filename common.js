@@ -4,14 +4,37 @@ function addEventListenersToCells(a) {
     for (let cell of allCells) {
         if (a === "findSame") {
             cell.addEventListener("click", () => {findSame(cell, allCells)});
-        }
+        } else if (a === "clear") {
+            cell.addEventListener("click", (e) => {
+                if (e.target.className.includes("removed")) {
+                    reAddNumberToCell(cell);
+                } else {
+                    clearCell(cell);
+                }
+            });   
+        } 
     }
+    
 }
 
-function addHoverToCells() {
+function addHoverToCells(a, cells) {
     let allCells = getAllCells();
-    for (let cell of allCells) {
-        cell.classList.add("hover-cells");
+
+    if (a === "add") {
+        for (let cell of allCells) {
+            cell.classList.remove("hover-cells-cleared");
+            cell.classList.add("hover-cells");
+        }
+    } else if (a === "cleared") {
+        if (cells.length > 0) {
+            for (let cell of cells) {
+                cell.classList.remove("hover-cells");
+                cell.classList.add("hover-cells-cleared");
+            }
+        } else {
+            cells.classList.remove("hover-cells");
+            cells.classList.add("hover-cells-cleared");
+        }
     }
 }
 
@@ -54,7 +77,7 @@ function createHomeLink() {
 
 function generateNumbers(amount) {
     for (i=0; i<amount; i++) {
-        let randomNum = Math.floor(Math.random() * 100);
+        let randomNum = randomNumber();
 
         let newNum = document.createElement("div");
         newNum.classList.add("cell");
@@ -66,6 +89,11 @@ function generateNumbers(amount) {
 
 function getAllCells() {;
     return document.querySelectorAll(".cell");
+}
+
+function randomNumber() {
+    let randomNum = Math.floor(Math.random() * 100);
+    return randomNum;
 }
 
 function removeMarked() {
