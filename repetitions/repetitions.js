@@ -22,6 +22,7 @@ function findMostRepeated() {
 
 function findNumbersNotInPlace() {
     let allCells = getAllCells();
+    numberNotInPlace.textContent = "";
 
     let numbersNotPresent = [];
     for (i=0; i<100; i++) {
