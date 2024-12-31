@@ -6,7 +6,7 @@ function getSumOfAllCells() {
         sum += parseInt(cell.textContent);
     }
 
-    sumOfAll.value = sum;
+    sumOfAll.textContent = sum;
 }
 
 function markCells(cell) {
@@ -14,20 +14,20 @@ function markCells(cell) {
     let cellValue = parseInt(cell.textContent);
     markedCellsSum += cellValue;
 
-    sumOfMarked.value = markedCellsSum;
+    sumOfMarked.textContent = markedCellsSum;
 }
 
 function resetMarked() {
     removeMarked();
     markedCellsSum = 0;
-    sumOfMarked.value = "-";
+    sumOfMarked.textContent = "-";
 }
 
 
 const sumOfAll = document.querySelector("#sum-of-all");
 const sumOfMarked = document.querySelector("#sum-of-marked");
 const reset = document.querySelector("#reset");
-sumOfMarked.value = "-";
+sumOfMarked.textContent = "-";
 let markedCellsSum = 0;
 getSumOfAllCells();
 addEventListenersToCells("sum");

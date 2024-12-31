@@ -11,14 +11,14 @@ function getRandomNumber() {
         }
     }
 
-    randomNumInput.value = randomNum;
+    randomNumInput.textContent = randomNum;
 
     return cellsWithNumber;
 }
 
 function removeCellsWithNumber(cells) {
     if (cells.length === 0) {
-        removedNumberInput.value = `Nothing to remove`;
+        removedNumberInput.textContent = `Nothing to remove`;
         return false;
     }
 
@@ -28,7 +28,7 @@ function removeCellsWithNumber(cells) {
         cell.textContent = "X";
     }
 
-    removedNumberInput.value = `${cellNumber} removed ${cells.length} times`;
+    removedNumberInput.textContent = `${cellNumber} removed ${cells.length} times`;
 }
 
 
@@ -38,8 +38,8 @@ const removeButton = document.querySelector("#remove");
 const removedNumberInput = document.querySelector("#removed-number");
 
 let currentRandomCells = null;
-randomNumInput.value = "";
-removedNumberInput.value = "";
+randomNumInput.textContent = "-";
+removedNumberInput.textContent = "-";
 addHoverToCells("add");
 
 findRandomNumButton.addEventListener("click", () => {
