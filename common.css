@@ -52,6 +52,13 @@ body {
     background-color: orange;
 }
 
+.info-div {
+    background-color: aqua;
+    border: 2px solid var(--hover-color);
+    padding: 5px;
+    text-align: center;
+}
+
 input {
     text-align: center;
     width: 50px;
@@ -61,7 +68,7 @@ input {
     width: 150px;
 }
 
-.longer-input {
+.longer-div {
     width: 400px;
 }
 
@@ -71,6 +78,10 @@ input {
 
 #message {
     font-size: 16px;
+}
+
+#numbers-not-here {
+    text-align: left;
 }
 
 p {
@@ -87,8 +98,4 @@ p {
     gap: 10px;
     max-width: 600px;
     margin: auto;
-}
-
-.wide-input {
-    height: 60px;
 }
