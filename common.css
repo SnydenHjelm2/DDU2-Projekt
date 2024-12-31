@@ -61,6 +61,10 @@ input {
     width: 150px;
 }
 
+.longer-input {
+    width: 400px;
+}
+
 .marked {
     background-color: aqua;
 }
@@ -83,4 +87,8 @@ p {
     gap: 10px;
     max-width: 600px;
     margin: auto;
+}
+
+.wide-input {
+    height: 60px;
 }
