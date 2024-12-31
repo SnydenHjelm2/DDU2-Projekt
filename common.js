@@ -12,6 +12,8 @@ function addEventListenersToCells(a) {
                     clearCell(cell);
                 }
             });   
+        } else if (a === "sum") {
+            cell.addEventListener("click", () => {markCells(cell)});
         } 
     }
     
