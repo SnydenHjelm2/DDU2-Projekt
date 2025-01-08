@@ -70,7 +70,7 @@ function displayCards(obj) {
         userValueSum += obj.userHand[0].value[1] + obj.userHand[1].value[0];
     } else if (obj.userHand[0].card === "A") {
         userValueSum += obj.userHand[0].value[1] + obj.userHand[1].value;
-    } else if (obj.dealerHand[1].card === "A") {
+    } else if (obj.userHand[1].card === "A") {
         userValueSum += obj.userHand[1].value[1] + obj.userHand[0].value;
     } else {
         userValueSum += obj.userHand[0].value + obj.userHand[1].value;
