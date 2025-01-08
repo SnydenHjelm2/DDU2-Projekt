@@ -1,0 +1,53 @@
+body {
+    background-color: var(--blackjack-bg);
+    margin: 0px 10px;
+}
+
+.card {
+    border: 2px solid black;
+    height: 100px;
+    width: 75px;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    background-color: white;
+    margin: 5px 0px;
+}
+
+.card p {
+    justify-self: center;
+    font-size: 18px;
+}
+
+.hand {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px;
+}
+
+#home {
+    border-bottom-color: var(--blackjack-hover);
+}
+
+#home:hover {
+    background-color: var(--blackjack-hover);
+}
+
+img {
+    height: 40px;
+    width: 40px;
+    justify-self: center;
+}
+
+.red-card {
+    color: red;
+}
+
+#wrapper {
+    display: flex;
+}
+
+#wrapper div {
+    flex-grow: 1;
+    flex-basis: 0;
+}

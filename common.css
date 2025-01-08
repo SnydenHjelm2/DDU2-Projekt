@@ -2,6 +2,8 @@
     box-sizing: border-box;
     --bg: #21b1e0;
     --hover-color: #3b3bec;
+    --blackjack-bg: #09ad09;
+    --blackjack-hover: #057005;
 }
 
 body {
