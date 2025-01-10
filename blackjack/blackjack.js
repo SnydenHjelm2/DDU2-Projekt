@@ -109,7 +109,6 @@ function drawHands(deck, bet) {
     let dealerHand = [];
     let userHand = [];
     let randomNum = randomNumber(2);
-    userBalance -= bet;
 
     if (randomNum === 0) {
         for (i=0; i<2; i++) {
@@ -156,6 +155,7 @@ function checkUserBet(userBet) {
         statusText.textContent = `Your bet was too high, you only have ${userBalance} chips`;
         return false;
     } else {
+        userBalance -= userBet;
         return true;
     }
 }
@@ -174,11 +174,14 @@ function userHit(hands) {
     let userHand = hands.userHand;
     let userHandValue = parseInt(userValues.textContent);
     let hasAce = false;
+    let ace = null;
     let aceCount = 0;
 
-    for (let card of userHand) {
-        if (card.card === "A") {
+
+    for (i=0; i<userHand.length; i++) {
+        if (userHand[i].card === "A") {
             hasAce = true;
+            ace = userHand[i];
             aceCount++;
         }
     }
@@ -195,6 +198,26 @@ function userHit(hands) {
 
     if (hasAce) {
         
+    } else if (drawnCard.card === "A") {
+        if (userHandValue + drawnCard.value > 21 && userHandValue + 1 > 21) {
+            statusText.textContent = `You've gone bust! You lost ${hands.bet} chips. To play again enter a new bet and press "New game".`;
+            userValues.textContent = userHandValue + drawnCard.value;
+            balance.textContent = userBalance;
+            gameStatus = false;
+        } else if (userHandValue + drawnCard.value > 21) {
+            drawnCard.value = 1;
+            statusText.textContent = `You drew a ${drawnCard.card} and now have ${userHandValue + drawnCard.value}, how do you wish to proceed?`;
+            userValues.textContent = userHandValue + drawnCard.value;
+        } else if (userHandValue + drawnCard.value === 21) {
+            statusText.textContent = `You got 21! You Won ${hands.bet * 2} chips! o play again enter a new bet and press "New game".`;
+            userValues.textContent = userHandValue + drawnCard.value;
+            userBalance += hands.bet * 2;
+            balance.textContent = userBalance;
+            gameStatus = false;
+        } else {
+            statusText.textContent = statusText.textContent `You drew a ${drawnCard.card} and now have ${userHandValue + drawnCard.value}, how do you wish to proceed?`;
+            userValues.textContent = userHandValue + drawnCard.value;
+        }
     } else {
         if (userHandValue + drawnCard.value > 21) {
             statusText.textContent = `Sorry! You've gone bust! You lost ${hands.bet} chips. To play again enter a new bet and press "New game".`;
@@ -208,6 +231,7 @@ function userHit(hands) {
             userBalance += hands.bet * 2;
             balance.textContent = userBalance;
         } else {
+            statusText.textContent = `You drew a ${drawnCard.card} and now have ${userHandValue + drawnCard.value}, how do you wish to proceed?`;
             userValues.textContent = userHandValue + drawnCard.value;
         }
     }
