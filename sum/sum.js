@@ -35,12 +35,14 @@ addEventListenersToCells("sum");
 reset.addEventListener("click", resetMarked);
 
 controls.buttonSelector.addEventListener("click", () => {
+    resetMarked();
     getSumOfAllCells();
     addEventListenersToCells("sum");
 });
 
 controls.inputSelector.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
+        resetMarked();
         getSumOfAllCells();
         addEventListenersToCells("sum");
     }
