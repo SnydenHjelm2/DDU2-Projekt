@@ -204,7 +204,7 @@ function userHit(hands) {
 
     if (hasAce) {
         if (aceCount > 0 && drawnCard.card === "A") {
-            if (userHandValue + drawnCard.value > 21 && (userHandValue + drawnCard.value - 10) < 21) {
+            if (userHandValue + drawnCard.value > 21 && (userHandValue + drawnCard.value - 10) <= 21) {
                 let newValue = 0;
                 drawnCard.value = 1;
                 newValue += drawnCard.value + userHandValue;
@@ -250,7 +250,7 @@ function userHit(hands) {
                 
 
             }
-        } if (aceCount === 1) {
+        } else if (aceCount === 1) {
             if (userHandValue + drawnCard.value > 21) {
                 console.log("if statement runs")
                 let newValue = 0;
@@ -262,24 +262,47 @@ function userHit(hands) {
                 }
                 console.log(newValue)
                 if (newValue > 21) {
-                    console.log("above 21")
                     statusText.textContent = `You've gone bust! You lost ${hands.bet} chips. To play again enter a new bet and press "New game".`;
                     userValues.textContent = newValue;
                     balance.textContent = userBalance;
                     gameStatus = false;
                 } else if (newValue === 21) {
-                    console.log("21")
                     statusText.textContent = `You got 21! You Won ${hands.bet * 2} chips! o play again enter a new bet and press "New game".`;
                     userValues.textContent = newValue;
                     userBalance += hands.bet * 2;
                     balance.textContent = userBalance;
                     gameStatus = false;
                 } else {
-                    console.log("below 21")
-                    statusText.textContent = `You drew a ${drawnCard.card} and now have ${userHandValue + drawnCard.value}, how do you wish to proceed?`;
+                    statusText.textContent = `You drew a ${drawnCard.card} and now have ${newValue}, how do you wish to proceed?`;
                     userValues.textContent = newValue;
                 }
             }   
+        } else if (aceCount >= 2) {
+            if (userHandValue + drawnCard.value > 21) {
+                let newValue = 0;
+                for (let card of userHand) {
+                    if (card.card === "A") {
+                        card.value = 1;
+                    }
+                    newValue += card.value;
+                }
+            }
+
+            if (newValue > 21) {
+                statusText.textContent = `You've gone bust! You lost ${hands.bet} chips. To play again enter a new bet and press "New game".`;
+                userValues.textContent = newValue;
+                balance.textContent = userBalance;
+                gameStatus = false;
+            } else if (newValue === 21) {
+                statusText.textContent = `You got 21! You Won ${hands.bet * 2} chips! o play again enter a new bet and press "New game".`;
+                userValues.textContent = newValue;
+                userBalance += hands.bet * 2;
+                balance.textContent = userBalance;
+                gameStatus = false;
+            } else {
+                statusText.textContent = `You drew a ${drawnCard.card} and now have ${newValue}, how do you wish to proceed?`;
+                userValues.textContent = newValue;
+            }
         }
         
     } else if (drawnCard.card === "A") {
@@ -328,6 +351,116 @@ function userHit(hands) {
     return hands;
 }
 
+function userStand(hands, userValue) {
+    if (!gameStatus) {
+        statusText.textContent = "The game is over! You can't stand. Start a new game";
+        return false;
+    }
+
+    gameStatus = false;
+
+    let dealerHand = hands.dealerHand;
+    let dealerHandValue = dealerHand[0].value + dealerHand[1].value;
+    let remainingDeck = hands.restDeck;
+    let hasAce = false;
+    let aceCount = 0;
+
+    for (let card of dealerHand) {
+        if (card.card === "A") {
+            hasAce = true;
+            aceCount++;
+        }
+    }
+
+    let hiddenCards = document.querySelector(".hidden");
+    hiddenCards.classList.remove("hidden");
+
+    let dealerStop = false;
+    while (!dealerStop) {
+        let num = randomNumber(remainingDeck.length);
+        let drawnCard = remainingDeck[num];
+        let cardDiv = document.createElement("div");
+        if (drawnCard.color === "diamonds" || drawnCard.color === "hearts") {cardDiv.classList.add("red-card")};
+        cardDiv.classList.add("card");
+        cardDiv.innerHTML = `<p>${drawnCard.card}</p><img src="images/${drawnCard.color}.png">`;
+        dealerHandDiv.appendChild(cardDiv);
+        dealerHand.push(drawnCard);
+        remainingDeck.splice(num, 1);
+
+
+
+
+        if (hasAce) {
+            if (drawnCard.card === "A") {
+
+            }
+        } else if (drawnCard.card === "A") {
+            if (dealerHandValue + drawnCard.value > 21) {
+                drawnCard.value = 1;
+                let newValue = dealerHandValue + drawnCard.value;
+
+                if (newValue > 21) {
+                    statusText.textContent = `The dealer has gone bust! You win ${hands.bet * 2} chips!`;
+                    userBalance += hands.bet * 2;
+                    balance.textContent = userBalance;
+                    dealerStop = true;
+                } else if (newValue === 21) {
+                    statusText.textContent = `The dealer got 21! You lost ${hands.bet} chips`;
+                    balance.textContent = userBalance;
+                    dealerStop = true;
+                } else if (newValue >= 17) {
+                    dealerStop = true;
+                    if (userValue > newValue) {
+                        statusText.textContent = `The dealer has ${newValue}. You have ${userValue}. You win ${hands.bet * 2} chips!`;
+                        userBalance += hands.bet * 2;
+                        balance.textContent = userBalance;
+                    } else if (userValue === newValue) {
+                        statusText.textContent = `Push! You both have ${newValue}. You get your money back`;
+                        userBalance += hands.bet;
+                        balance.textContent = userBalance;
+                    } else if (userValue < newValue) {
+                        statusText.textContent = `Dealer has ${newValue}. You have ${userValue}. You lose ${hands.bet} chips`;
+                        balance.textContent = userBalance;
+                    }
+                } 
+            } else {
+                continue;
+            }
+        } else {
+            dealerValues.textContent = dealerHandValue + drawnCard.value;
+            if (dealerHandValue + drawnCard.value > 21) {
+                statusText.textContent = `Dealer has gone bust! You win ${hands.bet * 2} chips!`;
+                userBalance += hands.bet * 2;
+                balance.textContent = userBalance;
+                dealerStop = true;
+                dealerHandValue = dealerHandValue + drawnCard.value;
+            } else if (dealerHandValue + drawnCard.value === 21) {
+                statusText.textContent = `Dealer got 21! You lose ${hands.bet} chips`;
+                balance.textContent = userBalance;
+                dealerHandValue = dealerHandValue + drawnCard.value;
+                dealerStop = true;
+            } else if (dealerHandValue + drawnCard.value >= 17) {
+                dealerStop = true;
+                let newValue = dealerHandValue + drawnCard.value;
+                dealerHandValue = dealerHandValue + drawnCard.value;
+                if (newValue > userValue) {
+                    statusText.textContent = `Dealer has ${newValue}. You have ${userValue}. You lose ${hands.bet} chips`;
+                    balance.textContent = userBalance;
+                } else if (newValue ===  userValue) {
+                    statusText.textContent = `Push! You both have ${newValue}. You get your money back`;
+                    userBalance += hands.bet;
+                    balance.textContent = userBalance;
+                } else if (newValue < userValue) {
+                    statusText.textContent = `The dealer has ${newValue}. You have ${userValue}. You win ${hands.bet * 2} chips!`;
+                    userBalance += hands.bet * 2;
+                    balance.textContent = userBalance;
+                }
+            } 
+        }
+    }
+    
+}
+
 
 const dealerHandDiv = document.querySelector("#dealer-hand");
 const userHandDiv = document.querySelector("#user-hand");
@@ -371,4 +504,8 @@ bet.addEventListener("keypress", (e) => {
 
 hit.addEventListener("click", () => {
     hands = userHit(hands);
+});
+
+stand.addEventListener("click", () => {
+    userStand(hands, parseInt(userValues.textContent));
 });
